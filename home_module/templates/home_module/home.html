@@ -2,6 +2,7 @@
 {% load static %}
 {% load products_tags %}
 {% load humanize %}
+{% load thumbnail %}
 
 {% block title %}
     خانه
@@ -281,10 +282,9 @@
             <!-- Collection Card-->
             <div class="card collection-card">
               <a href="{% url 'product_module:products_by_category_page' category_url=category.url %}">
-                {% comment %} {% thumbnail category.image "138x172" crop="center" quality=85 as im %}
-                <img src="{{ im.url }}" alt="{{ category.name }}">
-                {% endthumbnail %} {% endcomment %}
-                <img src='{{ category.image.url }}' alt="{{ category.name }}">
+                {% thumbnail category.image "138x145" crop="center" quality=85 as im %}
+                  <img src="{{ im.url }}" alt="{{ category.name }}">
+                {% endthumbnail %}
               </a>
               <div class="collection-title"><span>{{ category.name }}</span><span class="badge bg-danger">{{ category.count_products }}</span></div>
             </div>
