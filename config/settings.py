@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     "django_extensions",
     "debug_toolbar",
     "django_jalali",
+    "sorl.thumbnail",
     # app
     "home_module.apps.HomeModuleConfig",
     "account_module.apps.AccountModuleConfig",
