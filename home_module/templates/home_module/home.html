@@ -73,7 +73,9 @@
             <!-- Collection Card-->
             <div class="card collection-card">
               <a href="{% url 'product_module:products_by_brand_page' brand_url=brand.url %}">
-                <img src="{{ brand.image.url }}" alt="{{ brnad.name }}">
+                {% thumbnail brand.image "138x145" crop="center" quality=85 as im %}
+                  <img src="{{ im.url }}" alt="{{ brand.name }}">
+                {% endthumbnail %}
               </a>
               <div class="collection-title"><span>{{ brand.name }}</span></div>
             </div>
