@@ -11,7 +11,7 @@ def delete_image_on_product(sender, instance, **kwargs):
         path = Path(instance.image.path)
         if path.is_file():
             path.unlink()
-            
+
 
 @receiver(pre_save, sender=Product)
 def delete_image_product_on_modify(sender, instance, **kwargs):
@@ -32,8 +32,8 @@ def delete_image_on_many_image(sender, instance, **kwargs):
         path = Path(instance.image.path)
         if path.is_file():
             path.unlink()
-            
-            
+
+
 @receiver(pre_save, sender=ManyImages)
 def delete_image_many_image_on_modify(sender, instance, **kwargs):
     if not instance.pk:
@@ -53,8 +53,8 @@ def delete_image_on_brand(sender, instance, **kwargs):
         path = Path(instance.image.path)
         if path.is_file():
             path.unlink()
-            
-            
+
+
 @receiver(pre_save, sender=Brand)
 def delete_image_brand_on_modify(sender, instance, **kwargs):
     if not instance.pk:
@@ -66,7 +66,7 @@ def delete_image_brand_on_modify(sender, instance, **kwargs):
     if current_brand.image != instance.image:
         if current_brand.image and os.path.isfile(current_brand.image.path):
             os.remove(current_brand.image.path)
-            
+
 
 @receiver(post_delete, sender=Category)
 def delete_image_on_brand(sender, instance, **kwargs):
@@ -74,8 +74,8 @@ def delete_image_on_brand(sender, instance, **kwargs):
         path = Path(instance.image.path)
         if path.is_file():
             path.unlink()
-            
-            
+
+
 @receiver(pre_save, sender=Category)
 def delete_image_brand_on_modify(sender, instance, **kwargs):
     if not instance.pk:

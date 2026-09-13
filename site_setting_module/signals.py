@@ -9,9 +9,8 @@ def delete_logo_on_site_setting(sender, instance, **kwargs):
     if instance.logo:
         if os.path.isfile(instance.logo.path):
             os.remove(instance.logo.path)
-            
-            
-            
+
+
 @receiver(pre_save, sender=SettingSite)
 def delete_logo_sitesetting_on_modify(sender, instance, **kwargs):
     if not instance.pk:
@@ -25,16 +24,13 @@ def delete_logo_sitesetting_on_modify(sender, instance, **kwargs):
             os.remove(current_site_setting.logo.path)
 
 
-
-
 @receiver(post_delete, sender=Baner)
 def delete_image_on_baner(sender, instance, **kwargs):
     if instance.image:
         if os.path.isfile(instance.image.path):
             os.remove(instance.image.path)
-            
-            
-            
+
+
 @receiver(pre_save, sender=Baner)
 def delete_image_baner_on_modify(sender, instance, **kwargs):
     if not instance.pk:

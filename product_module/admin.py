@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Category, Brand, Product, ProductVariant, ManyImages
+from django_summernote.admin import SummernoteModelAdmin
 
 # Register your models here.
 
@@ -64,7 +65,8 @@ class BrandAdmin(admin.ModelAdmin):
 
 
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(SummernoteModelAdmin):
+    summernote_fields = ("description",)
     list_display = (
         "name",
         "brand",
