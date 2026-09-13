@@ -24,7 +24,7 @@
         {% if about %}
           <div class="card">
             <div class="card-body">
-                {{ about.description }}
+                {{ about.description|safe }}
                 <br>
                 <br>
                 <a class="btn btn-primary w-100" href="{% url 'contact_module:contact_page' %}"><i class="lni lni-life-ring mr-2"></i>ارتباط با ما</a>

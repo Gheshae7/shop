@@ -1,10 +1,14 @@
 from django.contrib import admin
 from .models import About, PrivacyPolicy
+from django_summernote.admin import SummernoteModelAdmin
+
 # Register your models here.
 
 
 @admin.register(About)
-class AboutAdmin(admin.ModelAdmin):
+class AboutAdmin(SummernoteModelAdmin):
+    summernote_fields = ("description",)
+
     list_display = (
         "name",
         "is_active",
@@ -20,7 +24,9 @@ class AboutAdmin(admin.ModelAdmin):
 
 
 @admin.register(PrivacyPolicy)
-class PrivacyPolicyAdmin(admin.ModelAdmin):
+class PrivacyPolicyAdmin(SummernoteModelAdmin):
+    summernote_fields = ("description",)
+
     list_display = (
         "name",
         "is_active",

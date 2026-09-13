@@ -30,7 +30,7 @@
         {% if privacy_policy %}
             <div class="privacy-policy-wrapper py-3">
             <h6>{{ privacy_policy.name }}</h6>
-            <p>{{ privacy_policy.description }}</p>
+            <p>{{ privacy_policy.description|safe }}</p>
             </div>
         {% else %}
         <div class="alert alert-warning">
