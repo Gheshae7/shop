@@ -49,9 +49,10 @@ function send_comment(){
                         }).showToast();                 
                     }
                 }else{
-                    document.getElementById('list_comment').innerHTML = res;
+                    document.getElementById('list_comment').innerHTML = res.comments_product;
                     document.getElementById('comments').value = null;
                     document.getElementById('comment_rating').value = null;
+                    document.getElementById('count_comments_product').innerHTML = `نظرات محصول(${res.count_comment_product})`;
                     Toastify({
                             text: 'کامنت شما با موفقیت ثبت شد و پس از بررسی نمایش داده می شود',
                             duration: 3500,

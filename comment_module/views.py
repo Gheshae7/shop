@@ -2,6 +2,7 @@ from django.shortcuts import render
 from comment_module.models import Comment
 from django.http import JsonResponse, HttpRequest, HttpResponse
 from product_module.models import Product
+from django.template.loader import render_to_string
 # Create your views here.
 
 
@@ -43,7 +44,28 @@ def add_commnet(request: HttpRequest) -> JsonResponse | HttpResponse:
                         message=message,
                         rating=int(rating),
                     )
-                    return comments_product(request=request, product_id=product_id)
+
+                    comments = (
+                        Comment.objects.filter(is_active=True, product_id=product_id)
+                        .select_related("user")
+                        .order_by("-created_at")
+                    )
+
+                    comments_product = render_to_string(
+                        "comment_module/component_partial/single_comment.html",
+                        {"comments": comments},
+                        request=request,
+                    )
+
+                    # return comments_product(request=request, product_id=product_id)
+                    return JsonResponse(
+                        {
+                            "comments_product": comments_product,
+                            "count_comment_product": Comment.objects.filter(
+                                product_id=product_id
+                            ).count(),
+                        }
+                    )
             except Product.DoesNotExist:
                 return JsonResponse(
                     {"icon": "error", "message": "محصول مورد نظر پیدا نشد"}

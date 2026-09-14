@@ -36,12 +36,15 @@ def delete_image_on_many_image(sender, instance, **kwargs):
 
 @receiver(pre_save, sender=ManyImages)
 def delete_image_many_image_on_modify(sender, instance, **kwargs):
+
     if not instance.pk:
-        pass
+        return
+
     try:
         current_many_image = ManyImages.objects.get(pk=instance.pk)
-    except Product.DoesNotExist:
+    except ManyImages.DoesNotExist:
         return
+
     if current_many_image.image != instance.image:
         if current_many_image.image and os.path.isfile(current_many_image.image.path):
             os.remove(current_many_image.image.path)
@@ -69,7 +72,7 @@ def delete_image_brand_on_modify(sender, instance, **kwargs):
 
 
 @receiver(post_delete, sender=Category)
-def delete_image_on_brand(sender, instance, **kwargs):
+def delete_image_on_category(sender, instance, **kwargs):
     if instance.image:
         path = Path(instance.image.path)
         if path.is_file():
@@ -77,7 +80,7 @@ def delete_image_on_brand(sender, instance, **kwargs):
 
 
 @receiver(pre_save, sender=Category)
-def delete_image_brand_on_modify(sender, instance, **kwargs):
+def delete_image_category_on_modify(sender, instance, **kwargs):
     if not instance.pk:
         pass
     try:
