@@ -220,3 +220,5 @@ uploads/
 
 
 .idea/
+
+pyproject.toml
