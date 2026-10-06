@@ -5,88 +5,13 @@
 
 #### Of course, I have also uploaded this project with `Docker`, which uses Python version `3.12.13`, which we will discuss later.
 
-# Run with Docker
 
-> *Linux*
-
-##### To run on Linux, make sure you have `Docker` and `Docker compose` installed on your system. If you don't have it installed, visit [Docker](https://docs.docker.com/desktop/setup/install/linux/) and install it according to your Linux distribution.
-
-## 1. clone project
-
-First go to your desired folder and then open the terminal. Make sure the terminal path shows your desired folder then enter the following command in the terminal:
-
-```
-git clone https://github.com/GHESHAE7/shop.git
-```
-
-When you run the following command, a folder called shop will be created that contains the project files and everything you need.
-
-
-## 2. Creating the .env file
-
-In the same shop folder, create a new file called `.env`.
-
-In Docker we are working with `postgresql` database version 17. For this reason I put the database information in the `.env` file and when the project is run it will take its information from this file.
-
-Copy this information into the `.env` file for database settings:
-
-```
-# postgres
-ENGINE=django.db.backends.postgresql
-NAME=name database
-USER=username
-PASSWORD=password user
-HOST=postgres
-PORT=5432
-```
-
-Of course, you can choose the database name, username, and password yourself, but you must also change the environment values ​​in the `docker-compose.yml` file. Match these values ​​in the `.env` file with the environments.
-
-```
-POSTGRES_PASSWORD: PASSWORD
-POSTGRES_USER: USER
-POSTGRES_DB: NAME
-```
-
-The `SECRET_KEY` variable in Django is read from the `.env` file. Of course, you can set its value to anything, but to ensure that it is not guessable, add this section to the `.env` file as well.
-
-```
-# secret key
-SECRET_KEY=anything
-```
-
-This project uses email to activate accounts, forget passwords, etc. Add the following to the `.env` file:
-
-```
-# email
-EMAIL_HOST_USER=example@gmail.com
-EMAIL_HOST_PASSWORD=app password
-```
-
-Fill in the `EMAIL_HOST` and `EMAIL_HOST_PASSWORD` values ​​based on your information.
-
-## 3. Project implementation
-
-
-To run the project, simply run the following command in your terminal in the shop folder:
-
-```
-sudo docker compose up --build
-```
-
-Your project has been successfully implemented and you can enter the `http://127.0.0.1:8000` in your browser to view it.
-
-To stop the project, enter the following command:
-
-```
-sudo docker compose down
-```
 
 # Run manually
 
 Follow the steps below to install.
 
-## 1. Clone Project
+## 1. Cloning the project's `sqlite` branch 
 
 > *Linux*
 
@@ -97,7 +22,11 @@ cd Dowloads/
 
 Then clone the project:
 ```
-git clone https://github.com/GHESHAE7/shop.git
+git clone -b --single-branch https://github.com/GHESHAE7/shop.git
+```
+⚠️ Note that this command clones only the `sqlite` branch; if you want to clone all branches, run this command:
+```
+git clone -b https://github.com/GHESHAE7/shop.git
 ```
 And go to the project folder with the following command:
 ```
@@ -115,8 +44,13 @@ cd Documents/
 
 Then clone the project:
 ```
-git clone https://github.com/GHESHAE7/shop.git
+git clone -b sqlite --single-branch https://github.com/GHESHAE7/shop.git
 ```
+⚠️ Note that this command clones only the `sqlite` branch; if you want to clone all branches, run this command:
+```
+git clone -b https://github.com/GHESHAE7/shop.git
+```
+
 And go to the project folder with the following command:
 ```
 cd shop/
@@ -162,32 +96,7 @@ pip install -r requirements.txt
 
 ## 4. Config database
 
-In the `main` branch of the project, it works with a `postgresql` database. First create a new database in `postgresql`. Then create a file called `.env` in your project folder `~/Downloads/shop` and fill these values ​​according to your database specifications.
-
-```
-# postgres
-ENGINE=django.db.backends.postgresql
-NAME=name database
-USER=username
-PASSWORD=password
-HOST=ip or domain
-PORT=port
-```
-
-To use `sqlite3` database, you need to change the `DATABASE` values ​​in the vongi file and replace it with the following value:
-
-```
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-```
-
-Click to install [sqlite3](https://sqlite.org/).
-
-`Note: If the db.sqlite3 file does not exist in the project folder, create it.`
+To configure the database, create a `db.sqlite3` file in the project folder.
 
 ## 7. Config Email & Secret key
 
@@ -195,11 +104,11 @@ This project has placed the required information in the `.env` file to send emai
 
 ```
 # email
-EMAIL_HOST_USER=example@gmail.com
-EMAIL_HOST_PASSWORD=app passwprd
+EMAIL_HOST_USER=youremail
+EMAIL_HOST_PASSWORD=apppassword
 
 # secret key
-SECRET_KEY=secret key
+SECRET_KEY=yoursecretkey
 ```
 
 ## 6. Migrations
